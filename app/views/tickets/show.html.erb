@@ -1,0 +1,26 @@
+<head>
+  <title>Ticket <%= @ticket.id %></title>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <%= stylesheet_link_tag 'tickets/show', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<div class="card">
+  <p>Excavator Name:<strong>  <%= @ticket.excavator.company_name %></strong></p>
+  <p>Excavator Address:<strong>  <%= @ticket.excavator.address %></strong></p>
+  <p>Excavator Crew:<strong>  <%= @ticket.excavator.crew_on_site %></strong></p>
+
+  <div id="map" style="height: 900px; width: 900px"></div>
+  <p class="card-footer">Created by <strong>ikl0</strong></p>
+</div>
+
+<script>
+    var polygonCoords = <%= @ticket.digsite_info.match_clear_coord %>;
+    var map = L.map('map').setView(<%= @ticket.digsite_info.match_clear_coord.first %>, 9);
+
+    L.marker(<%= @ticket.digsite_info.match_clear_coord.first %>).addTo(map)
+      .bindPopup("Request Number: <br><%= @ticket.request_number %>")
+      .openPopup();
+
+    var polygon = L.polygon(polygonCoords, { color: 'red' }).addTo(map);
+</script>

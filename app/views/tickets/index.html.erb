@@ -1,0 +1,61 @@
+<head>
+  <%= stylesheet_link_tag 'tickets/index', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<% if @tickets.any? %>
+<h1>All <span class="blue"></span><span class="yellow">Tickets</span></h1>
+
+<table class="container">
+  <thead>
+  <tr>
+    <th><h1>Request Number</h1></th>
+    <th><h1>Sequence Number</h1></th>
+    <th><h1>Request Type</h1></th>
+    <th><h1>Request Action</h1></th>
+    <th><h1>Excavator</h1></th>
+    <th><h1>Add Service Area Codes</h1></th>
+    <th><h1>Primary Service Area Code</h1></th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @tickets.each do |ticket| %>
+    <tr>
+      <td class="link"><%= link_to ticket.request_number, ticket_path(ticket) %></td>
+      <td><%= ticket.sequence_number %></td>
+      <td><%= ticket.request_type %></td>
+      <td><%= ticket.request_action %></td>
+      <td>
+        <% if ticket.excavator %>
+          <%= ticket.excavator.company_name %>
+        <% else %>
+          N/A
+        <% end %>
+      </td>
+      <td>
+        <% if ticket.additional_service_area_codes.any? %>
+          <ul>
+            <% ticket.additional_service_area_codes.each do |sa_code| %>
+              <li><%= sa_code.sa_code %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          N/A
+        <% end %>
+      </td>
+      <td>
+        <% if ticket.primary_service_area_code.present? %>
+          <ul>
+            <li><%= ticket.primary_service_area_code.sa_code %></li>
+          </ul>
+        <% else %>
+          N/A
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% else  %>
+    <h2>There are no any tickets yet.</h2>
+  <% end %>
+  </tbody>
+</table>
+
