@@ -5,10 +5,10 @@ FactoryBot.define do
     request_type { "Normal" }
     request_action { "Restake" }
 
-    excavator { association :excavator }
+    association :excavator, strategy: :build
 
     after(:build) do |ticket|
-      ticket.excavator ||= build(:excavator, ticket: ticket)
+      ticket.excavator ||= build_stubbed(:excavator, ticket: ticket)
     end
 
     trait :with_additional_service_area_codes do
