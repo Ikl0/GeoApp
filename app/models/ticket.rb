@@ -13,8 +13,8 @@ class Ticket < ApplicationRecord
                                         where(primary: true)
                                       }, class_name: 'ServiceAreaCode', foreign_key: 'ticket_id'
 
-
-  validates :request_number, presence: true, format: { with: /\A\d{8}-\d{5}\z/, message: "should be in the format '09252012-00001'" }
+  validates :request_number, presence: true,
+                             format: { with: /\A\d{8}-\d{5}\z/, message: "should be in the format '09252012-00001'" }
 
   def self.from_params(params)
     ticket = new(
