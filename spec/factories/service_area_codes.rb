@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :service_area_code do
     sequence(:sa_code) { |n| "ZZL#{format('%02d', n)}" }
