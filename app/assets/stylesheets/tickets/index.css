@@ -93,7 +93,7 @@ h2 {
     box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container td:hover {
+.container td.link:hover {
     background-color: #FFF842;
     color: #403E10;
     font-weight: bold;
