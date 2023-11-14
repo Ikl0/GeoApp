@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: geo_app_production
-  username: geo_app
-  password: <%= ENV["GEO_APP_DATABASE_PASSWORD"] %>
+  url: <%=ENV['DATABASE_URL'] %>
